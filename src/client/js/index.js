@@ -1,4 +1,6 @@
 import '../css/app.scss';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 class App {
     constructor () {
@@ -6,8 +8,7 @@ class App {
     }
 
     initApp () {
-      // Start application
-        console.log('hello bg')
+        // Start application
     }
 }
 

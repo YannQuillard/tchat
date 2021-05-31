@@ -1,12 +1,16 @@
 const {resolve} = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const webpack = require('webpack')
 
 config = {
-    entry: './src/client/js/index.js',
+    entry: {
+        main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/client/js/index.js']
+    },
     output: {
-        filename: 'main.js',
-        path: resolve(__dirname, 'build', 'client')
+        path: resolve(__dirname, 'build-dev'),
+        publicPath: '/',
+        filename: 'main.js'
     },
     mode: 'development',
     module: {
@@ -42,7 +46,9 @@ config = {
         new ESLintPlugin({
             context: resolve(__dirname, 'src'),
             files: 'js/**/*.js',
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin()
     ],
     stats: 'normal'
 };
