@@ -1,16 +1,13 @@
-const {resolve} = require('path');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const webpack = require('webpack')
 
 config = {
-    entry: {
-        main: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000', './src/client/js/index.js']
-    },
+    entry: './src/client/js/index.js',
     output: {
-        path: resolve(__dirname, 'build-dev'),
-        publicPath: '/',
-        filename: 'main.js'
+        filename: 'main.js',
+        path: path.resolve(__dirname, 'dist'),
     },
     mode: 'development',
     module: {
@@ -20,36 +17,48 @@ config = {
                 loader: 'html-loader',
             },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.hbs/,
+                loader: 'handlebars-loader',
+            },
+            {
+                test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource'
+                type: 'asset/resource',
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)$/,
-                type: 'asset/resource'
+                type: 'asset/resource',
             },
-        ]
+        ],
     },
     plugins: [
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: ['dist']
+        }),
         new HtmlWebpackPlugin({
-            template: resolve(__dirname, 'src', 'client', 'index.html'),
-            filename: 'index.html'
+            template: './public/index.html',
+            filename: 'index.html',
         }),
         new ESLintPlugin({
-            context: resolve(__dirname, 'src'),
+            context: path.resolve(__dirname, 'src'),
             files: 'js/**/*.js',
         }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
     ],
-    stats: 'normal'
+    devServer: {
+        port: 3000,
+        open: true,
+        historyApiFallback: true,
+        proxy: {
+            '/api': 'http://localhost:8080'
+        }
+    },
 };
 module.exports = config;

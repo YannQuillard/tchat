@@ -78,7 +78,7 @@ config = {
     plugins: [
         // Génère un document HTML à partir du template indiqué
         new HtmlWebpackPlugin({
-            template: resolve(__dirname, 'src', 'client', 'index.html'),
+            template: resolve(__dirname, 'public', 'index.html'),
             filename: 'index.html'
         }),
         // Options de sortie de la feuille de style générée
