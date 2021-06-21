@@ -3,13 +3,14 @@ const express = require('express')
 const passport = require('passport')
 const session = require('express-session')
 const routes = require('./middlewares/routes')
+const path = require('path')
 
 const app = express()
 
 const PORT = process.env.PORT
-
-app.set('env', process.env.NODE_ENV);
-console.log(`Application env: ${process.env.NODE_ENV}`)
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')))
+}
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
