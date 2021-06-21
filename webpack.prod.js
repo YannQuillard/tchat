@@ -8,7 +8,7 @@ config = {
     // Paramètres de sortie (nom du fichier JavaScript principal, chemin...)
     output: {
         filename: 'main.js',
-        path: resolve(__dirname, 'build', 'client'),
+        path: resolve(__dirname, 'src', 'client', 'build'),
         publicPath: '',
     },
     // Mode de build ('development' ou 'production')
@@ -78,7 +78,7 @@ config = {
     plugins: [
         // Génère un document HTML à partir du template indiqué
         new HtmlWebpackPlugin({
-            template: resolve(__dirname, 'public', 'index.html'),
+            template: resolve(__dirname, 'src', 'client', 'public', 'index.html'),
             filename: 'index.html'
         }),
         // Options de sortie de la feuille de style générée

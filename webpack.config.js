@@ -44,7 +44,7 @@ config = {
             cleanAfterEveryBuildPatterns: ['dist']
         }),
         new HtmlWebpackPlugin({
-            template: './public/index.html',
+            template: './src/client/public/index.html',
             filename: 'index.html',
         }),
         new ESLintPlugin({
