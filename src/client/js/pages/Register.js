@@ -38,7 +38,7 @@ class Register extends Component {
         }
 
         if(typeof fields['username'] !== 'undefined') {
-            if(fields['username'].length < 5) {
+            if(fields['username'].length < 2) {
                 errors['username'] = 'Too short';
                 formIsValid = false;
                 console.log('username too short')
@@ -90,9 +90,33 @@ class Register extends Component {
             <div className="register">
                 <h2>Register</h2>
                 <Form submit={e => this.handleSubmit(e)}>
-                    <TextInput name={'username'} type={'text'} label={'username'} placeholder={'Ex: Fifou'} required change={this.handleChange.bind(this, 'username')} value={this.state.fields['username']}/>
-                    <TextInput name={'email'} type={'email'} label={'Email'} placeholder={'Ex: fifou@protonmail.com'} required change={this.handleChange.bind(this, 'email')} value={this.state.fields['email']}/>
-                    <TextInput name={'password'} type={'password'} label={'Mot de passe :'} placeholder={'••••••••'} required change={this.handleChange.bind(this, 'password')} value={this.state.fields['password']}/>
+                    <TextInput
+                        name={'username'}
+                        type={'text'}
+                        label={'username'}
+                        placeholder={'Ex: Fifou'}
+                        required
+                        change={this.handleChange.bind(this, 'username')}
+                        value={this.state.fields['username']}
+                    />
+                    <TextInput
+                        name={'email'}
+                        type={'email'}
+                        label={'Email'}
+                        placeholder={'Ex: fifou@mail.com'}
+                        required
+                        change={this.handleChange.bind(this, 'email')}
+                        value={this.state.fields['email']}
+                    />
+                    <TextInput
+                        name={'password'}
+                        type={'password'}
+                        label={'Mot de passe :'}
+                        placeholder={'••••••••'}
+                        required
+                        change={this.handleChange.bind(this, 'password')}
+                        value={this.state.fields['password']}
+                    />
                     <input type="submit" value="Envoyer" />
                 </Form>
             </div>

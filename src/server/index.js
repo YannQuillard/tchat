@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const passport = require('passport')
+require('./config/passport')(passport)
 const session = require('express-session')
 const routes = require('./middlewares/routes')
 const path = require('path')

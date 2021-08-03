@@ -30,12 +30,12 @@ module.exports = {
             res.status(200).json(result)
         })
     },
-    updateUserById: (req, res) => {
+    upById: (req, res) => {
         const userData = req.body.vals
         bcrypt.hash(userData[2], saltRounds, (err, hash) => {
             if (err) {
                 console.error(err)
-            }
+            }dateUser
 
             userData[2] = hash
             db.User.updateOne(userData, req.params.id, result => {

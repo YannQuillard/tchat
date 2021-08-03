@@ -25,5 +25,13 @@ export default {
         } catch (err) {
             return console.log(err)
         }
+    },
+    postUserLogin: async (user, done) => {
+        try {
+            const res = await axios.post('/api/login', user)
+            return done(false, res.data || 'error logging in')
+        } catch (err) {
+            return done(true, false)
+        }
     }
 }

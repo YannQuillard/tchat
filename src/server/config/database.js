@@ -1,6 +1,7 @@
 require('dotenv').config()
 const mysql = require('mysql')
 
+//CONNECTION TO THE DB
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -9,6 +10,7 @@ const connection = mysql.createConnection({
     database: process.env.DB_NAME
 })
 
+//IF ERROR
 connection.connect((err) => {
     if (!err) {
         console.log('Connected to the MySQL server.');
